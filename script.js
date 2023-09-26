@@ -8,7 +8,6 @@ const computerChoiceElem = document.querySelector('#computer-choice');
 const weapons = ['rock', 'paper', 'scissors'];
 let playerScore = 0;
 let computerScore = 0;
-// let countdown = 10;
 let timeout;
 let isLoggedIn = false;
 let username = "";
@@ -28,60 +27,53 @@ function play() {
     if (!isLoggedIn) {
         alert('Please login first!');
         return;
-    }
-}
-// computer play
-function computerPlay() {
-  const weaponIndex = Math.floor(Math.random() * weapons.length);
-  return weapons[weaponIndex];
 }
 
+}
 // display result
 function updateScore(playerWeapon, computerWeapon) {
-  clearTimeout(timeout);
-  if (playerWeapon) {
-    computerChoiceElem.innerHTML = `Computer choose: ${computerWeapon}.`;
-    if (playerWeapon === computerWeapon) {
-      resultElem.innerHTML = "It's a tie!";
-    } else if (
-      (playerWeapon === 'rock' && computerWeapon === 'scissors') ||
-      (playerWeapon === 'paper' && computerWeapon === 'rock') ||
-      (playerWeapon === 'scissors' && computerWeapon === 'paper')
-    ) {
-      resultElem.innerHTML = 'You win!';
-      playerScore++;
-      playerScoreElem.innerHTML = `Player: ${playerScore}`;
-    } else {
-      resultElem.innerHTML = 'Computer wins!';
-      computerScore++;
-      computerScoreElem.innerHTML = `Computer: ${computerScore}`;
+    clearTimeout(timeout);
+    if (playerWeapon) {
+      computerChoiceElem.innerHTML = `Computer choose: ${computerWeapon}.`;
+      if (playerWeapon === computerWeapon) {
+        resultElem.innerHTML = "It's a tie!";
+      } else if (
+        (playerWeapon === 'rock' && computerWeapon === 'scissors') ||
+        (playerWeapon === 'paper' && computerWeapon === 'rock') ||
+        (playerWeapon === 'scissors' && computerWeapon === 'paper')
+      ) {
+        resultElem.innerHTML = 'You win!';
+        playerScore++;
+        playerScoreElem.innerHTML = `Player: ${playerScore}`;
+      } else {
+        resultElem.innerHTML = 'Computer wins!';
+        computerScore++;
+        computerScoreElem.innerHTML = `Computer: ${computerScore}`;
+      }
+    
+    } 
+  
+    if (playerScore === 5) {
+      resultElem.textContent = 'You win the game!';
+      resultElem.style.color = 'green';
+      computerChoiceElem.innerHTML = 'Game Over';
+      disableOptions();
+     
     }
-    // startTimer();
-  } else {
-    computerChoiceElem.innerHTML = `Game Over`;
-    resultElem.innerHTML = 'You did not make a choice! | You lose the game!';
-    resultElem.style.color = 'red';
-    disableOptions();
+  
+    if (computerScore === 5) {
+      resultElem.textContent = 'You lose the game!';
+      resultElem.style.color = 'red';
+      computerChoiceElem.innerHTML = 'Game Over';
+      disableOptions();
+      
+    }
   }
 
-  if (playerScore === 5) {
-    resultElem.textContent = 'You win the game!';
-    resultElem.style.color = 'green';
-    computerChoiceElem.innerHTML = 'Game Over';
-    disableOptions();
-    // stopTimer();
-  }
 
-  if (computerScore === 5) {
-    resultElem.textContent = 'You lose the game!';
-    resultElem.style.color = 'red';
-    computerChoiceElem.innerHTML = 'Game Over';
-    disableOptions();
-    // stopTimer();
-  }
-}
 
-// Function to handle player choice
+
+// player
 function selectWeapon() {
   clearTimeout(timeout);
 
@@ -90,8 +82,16 @@ function selectWeapon() {
   updateScore(playerWeapon, computerWeapon);
 }
 
+// computer play
+function computerPlay() {
+    const weaponIndex = Math.floor(Math.random() * 3);
+    return weapons[weaponIndex];
+  }
 
-// Function to reset the game
+
+
+
+// rest game
 function resetGame() {
   playerScore = 0;
   computerScore = 0;
