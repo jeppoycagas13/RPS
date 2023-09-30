@@ -1,9 +1,21 @@
 let computer = '';
+let scoreLimit = 5;
+let username = "";
+let playerscore ="";
+let computerscore ="";
 const score = JSON.parse(localStorage.getItem('score')) || {  
     wins: 0,
     losses: 0,
     ties: 0,
     totalGame: 0
+}
+function login() {
+    username = document.getElementById("username").value;
+    if (username) {
+        document.getElementById("loginSection").classList.add("d-none");
+        document.getElementById("gameSection").classList.remove("d-none");
+        document.getElementById("playerName").innerText = username;
+    }
 }
 
 
@@ -88,6 +100,27 @@ function playGame(playerMove) {
         computerMove = '<i class="fa-solid fa-hand"></i>'
     } else if (computer === 'Scissor') {
         computerMove = '<i class="fa-solid fa-hand-peace"></i>'
+    }
+    if (result === scoreLimit || result === scoreLimit) {
+        document.getElementById("resetBtn").classList.remove("d-none");
+        document.querySelector('.btn-group').classList.add("d-none");
+        document.getElementById("resetBtn").removeAttribute('disabled');
+    }
+    function resetGame() {
+        playerScore = 0;
+        computerScore = 0;
+        drawScore = 0;
+    
+        document.getElementById("playerScore").innerText = playerScore;
+        document.getElementById("computerScore").innerText = computerScore;
+        document.getElementById("drawScore").innerText = drawScore;
+    
+        document.getElementById("game").classList.add("d-none");
+        document.getElementById("username").value = "";
+        document.getElementById("username").removeAttribute("readonly");
+        document.querySelector('button').removeAttribute('disabled');
+        document.getElementById("resetBtn").classList.add("d-none");
+        document.querySelector('.btn-group').classList.remove("d-none");
     }
 
     localStorage.setItem('score', JSON.stringify(score));
