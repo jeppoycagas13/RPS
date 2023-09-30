@@ -1,124 +1,104 @@
-const choices = document.querySelectorAll('.choice');
-const playerScoreElem = document.querySelector('.player-score');
-const computerScoreElem = document.querySelector('.computer-score');
-const resultElem = document.querySelector('#result');
-const playAgainBtn = document.querySelector('#play-again');
-const computerChoiceElem = document.querySelector('#computer-choice');
+let computer = '';
+const score = JSON.parse(localStorage.getItem('score')) || {  
+    wins: 0,
+    losses: 0,
+    ties: 0,
+    totalGame: 0
+}
 
-const weapons = ['rock', 'paper', 'scissors'];
-let playerScore = 0;
-let computerScore = 0;
-let timeout;
-let isLoggedIn = false;
-let username = "";
 
-// log in
-function login() {
-    username = document.getElementById('username').value;
-    if (username.trim() !== "") {
-        isLoggedIn = true;
-        document.getElementById('welcomeUser').textContent = username;
-        document.getElementById('loginContainer').style.display = 'none';
-        document.getElementById('gameContainer').style.display = 'block';
-        document.getElementById('scoreContainer').style.display = 'block';
+
+function playGame(playerMove) {
+
+    const randomNumber = Math.random();
+    console.log(randomNumber);
+
+    if (randomNumber <= 0.33) {
+        computer = 'Rock';
+    } else if (randomNumber > 0.33 && randomNumber > 0.66) {
+        computer = 'Paper';
+    } else {
+        computer = 'Scissor';
     }
-}
-function play() {
-    if (!isLoggedIn) {
-        alert('Please login first!');
-        return;
-}
-
-}
-// display result
-function updateScore(playerWeapon, computerWeapon) {
-    clearTimeout(timeout);
-    if (playerWeapon) {
-      computerChoiceElem.innerHTML = `Computer choose: ${computerWeapon}.`;
-      if (playerWeapon === computerWeapon) {
-        resultElem.innerHTML = "It's a tie!";
-      } else if (
-        (playerWeapon === 'rock' && computerWeapon === 'scissors') ||
-        (playerWeapon === 'paper' && computerWeapon === 'rock') ||
-        (playerWeapon === 'scissors' && computerWeapon === 'paper')
-      ) {
-        resultElem.innerHTML = 'You win!';
-        playerScore++;
-        playerScoreElem.innerHTML = `Player: ${playerScore}`;
-      } else {
-        resultElem.innerHTML = 'Computer wins!';
-        computerScore++;
-        computerScoreElem.innerHTML = `Computer: ${computerScore}`;
-      }
+    console.log(computer);
     
-    } 
-  
-    if (playerScore === 5) {
-      resultElem.textContent = 'You win the game!';
-      resultElem.style.color = 'green';
-      computerChoiceElem.innerHTML = 'Game Over';
-      disableOptions();
-     
+    
+    if (playerMove === 'Rock') {
+
+        if (computer === 'Paper') {
+            result = 'You Lose!'
+        } else if (computer === 'Scissor') {
+            result = 'You Win!'
+        } else {
+            result = 'Tie!'
+        }
+
     }
-  
-    if (computerScore === 5) {
-      resultElem.textContent = 'You lose the game!';
-      resultElem.style.color = 'red';
-      computerChoiceElem.innerHTML = 'Game Over';
-      disableOptions();
-      
+
+    if (playerMove === 'Paper') {
+
+        if (computer === 'Rock') {
+            result = 'You Win!'
+        } else if (computer === 'Scissor') {
+            result = 'You Lose!'
+        } else {
+            result = 'Tie!'
+        }
+
     }
-  }
+
+    if (playerMove === 'Scissor') {
+
+        if (computer === 'Paper') {
+            result = 'You Win!'
+        } else if (computer === 'Rock') {
+            result = 'You Lose!'
+        } else {
+            result = 'Tie!'
+        }
+
+    }
+
+    if (result === 'You Win!') {
+        score.wins += 1;
+        score.totalGame +=1;
+    } else if (result === 'You Lose!') {
+        score.totalGame +=1;
+        score.losses += 1;
+    } else if (result === 'Tie!') {
+        score.totalGame +=1;
+        score.ties += 1;
+    }
+    
+    let yourMove = '';
+
+    if (playerMove === 'Rock') {
+        yourMove = '<i class="fa-solid fa-hand-fist"></i>'
+    } else if (playerMove === 'Paper') {
+        yourMove = '<i class="fa-solid fa-hand"></i>'
+    } else if (playerMove === 'Scissor') {
+        yourMove = '<i class="fa-solid fa-hand-peace"></i>'
+    }
+
+    let computerMove = '';
+
+    if (computer === 'Rock') {
+        computerMove = '<i class="fa-solid fa-hand-fist"></i>'
+    } else if (computer === 'Paper') {
+        computerMove = '<i class="fa-solid fa-hand"></i>'
+    } else if (computer === 'Scissor') {
+        computerMove = '<i class="fa-solid fa-hand-peace"></i>'
+    }
+
+    localStorage.setItem('score', JSON.stringify(score));
+
+    document.querySelector('.button-result1').innerHTML = yourMove;
+    document.querySelector('.button-result2').innerHTML = computerMove;
+
+    document.querySelector('.result').innerHTML = result;
+    document.querySelector('.score').innerHTML = ` Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
+    document.querySelector('.total-game').innerHTML = `Total Games: ${score.totalGame}`;
 
 
-
-
-// player
-function selectWeapon() {
-  clearTimeout(timeout);
-
-  const playerWeapon = this.id;
-  const computerWeapon = computerPlay();
-  updateScore(playerWeapon, computerWeapon);
+    
 }
-
-// computer play
-function computerPlay() {
-    const weaponIndex = Math.floor(Math.random() * 3);
-    return weapons[weaponIndex];
-  }
-
-
-
-
-// rest game
-function resetGame() {
-  playerScore = 0;
-  computerScore = 0;
-  countdown = 10;
-  playerScoreElem.innerHTML = 'Player: 0';
-  computerScoreElem.innerHTML = 'Computer: 0';
-  resultElem.innerHTML = 'Choose your weapon!';
-
-  resultElem.style.color = '#660033';
-  computerChoiceElem.innerHTML = '';
-  enableOptions();
-
-}
-
-function disableOptions() {
-  choices.forEach((choice) => {
-    choice.style.pointerEvents = 'none';
-  });
-}
-
-function enableOptions() {
-  choices.forEach((choice) => {
-    choice.style.pointerEvents = 'auto';
-  });
-}
-
-// Event listeners
-choices.forEach((choice) => choice.addEventListener('click', selectWeapon));
-playAgainBtn.addEventListener('click', resetGame);
-

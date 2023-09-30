@@ -1,143 +1,86 @@
-
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
-
-
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  background-color: rgb(60, 60, 60);
+  color: aliceblue;
 }
 
-body {
-  font-family: 'Roboto', sans-serif;
-  background-color: white
-}
-.container {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.loginContainer {
-    max-width: 300px;
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    text-align: center;
-}
-.loginContainer h3 {
-    margin-bottom: 20px;
-}
-.loginContainer input {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.loginContainer button {
-    width: 100%;
-    padding: 10px;
-    background-color: #000000;
-    border-color: #000000;
-}
-.loginContainer button:hover
-{
-    background-color: grey;
-    border-color: grey;
-}
-
-h1 {
-  text-align: center;
-  font-size: 3rem;
-  margin-top: 2rem;
-  color: #000000;
-}
-
-
-.scoreboard {
+.main {
+  margin-top: 70px;
   display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-}
-
-.scoreboard > div {
-  font-size: 2rem;
-  margin: 0 1rem;
-  padding: 0.5rem;
-  border: 2px solid #000000;
-  border-radius: 10px;
-  color: #000000;
-}
-
-
-.choices {
-  display: flex;
-  justify-content: center;
-  margin-top: 3rem;
-}
-
-.choice {
-  border: 2px solid #000000;
-  border-radius: 10px;
-  margin: 0 2rem;
-  padding: 2rem;
-  background-color: #000000;
-  transition: transform 0.2s ease-in-out;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  border-color: black;
+  border: 10px;
 }
 
-.choice:hover {
-  transform: scale(1.1);
-}
-
-.choice:active {
-  transform: scale(0.9);
-}
-
-.choice i {
-  color: #ffffff;
+.round-button {
+  border-radius: 100%; 
+  background-color: black;
   font-size: 50px;
+  padding: 40px 40px;
+  margin-left: 10px;
 }
 
-
-.result {
-  text-align: center;
-  font-size: 2rem;
-  margin-top: 2rem;
-  color: #000000;
+.round-button-result {
+  border-radius: 100%; 
+  background-color: black;
+  font-size: 20px;
+  padding: 40px 40px;
+  margin-left: 10px;
 }
 
-#computer-choice {
-  text-align: center;
-  font-size: 2rem;
-  color: #000000;
+#reset-button {
+  margin-top: 30px;
+  height: 50px;
+  width: 100px;
 }
 
-
-.play-again {
-  display: block;
-  margin: 3rem auto 1rem auto;
-  padding: 1rem 2rem;
-  border: none;
+.card-game {
+  margin-top: 10px;
+  border: 1px solid #e0e0e0;
   border-radius: 10px;
-  background-color: #000000;
-  color: #FFFFFF;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  width: 500px;
+  max-width: 500px;
 }
 
-.play-again:hover {
-  background-color: #636363;
+.card-history {
+  margin-top: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  width: 500px;
+  height: 200px;
+  max-width: 500px;
+  max-height: 500px;
 }
 
-.play-again:active {
-  transform: scale(0.9);
+
+.card-button {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
 }
 
+
+.round-button i {
+  background-color: black;
+  border-radius: 50%;
+  padding: 0px;
+  color: #ffffff;
+}
+
+.card-result {
+  margin-top: 40px;
+  margin-left: 30px;
+}
+
+.round-button-result i {
+  background-color: black;
+  border-radius: 50%;
+  color: #ffffff;
+}

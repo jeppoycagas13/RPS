@@ -1,47 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Rock, Paper, Scissors Game</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissor Game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    
+    
+    <div class="main">
 
-    <div class="container mt-5">
-        <div class="loginContainer" id="loginContainer">
-            <h3>Login</h3>
-            <input type="text" id="username" class="form-control mb-2" placeholder="Username">
-            <button class="btn btn-primary" onclick="login()">Login</button>
-        </div> 
+        <div class="card-game">
+        
+            <h1>Rock Paper Scissor Game!</h1>
+            <h3>vs Computer</h3>
 
-        <div id="gameContainer" style="display: none;">
-            <h1>Welcome <span id="welcomeUser"></span>!</h1>
-            </a><h1>Rock, Paper, Scissors</h1>
-        <div class="scoreboard">
-     <div class="player-score">Player: 0</div>
-        <div class="computer-score">Computer: 0</div>
+            <div class="buttons">
+                <button class="button round-button" id="rock" onclick="playGame('Rock')"><i class="fa-solid fa-hand-fist"></i></button>
+                <button class="button round-button" id="paper" onclick="playGame('Paper')"><i class="fa-solid fa-hand"></i></button>
+                <button class="button round-button" id="scissor" onclick="playGame('Scissor')"><i class="fa-solid fa-hand-peace"></i></button>
+            </div>
+
         </div>
-        <div class="choices">
-         <div class="choice" id="rock">
-      <i class="fas fa-hand-rock"></i>
-        </div>
-    <div class="choice" id="paper">
-      <i class="fas fa-hand-paper"></i>
-    </div>
-    <div class="choice" id="scissors">
-      <i class="fas fa-hand-scissors"></i>
-    </div>
-  </div>
-  <div class="result" id="result">
-    <p>Choose your weapon!</p>
-  </div>
-  <div id="computer-choice"></div>
 
-  <button class="play-again" id="play-again">Play Again</button>
-</div>
-</div>
-  <script src="script.js"></script>
+        <div class="card-game">
+
+            <h3>Game Result</h3>
+            <div class="card-result">
+                
+                <p>You <button class="button button-result1 round-button-result" id="rock" disabled></button><button class="button button-result2 round-button-result" id="paper" disabled></button> Computer</p>
+
+            </div>
+            <h2 class="result">No Result</h2>
+            <p>Record:</p>
+            <p class="score">Wins: 0, Losses: 0, Ties: 0,</p>
+            <p class="total-game">Total Games: 0</p>
+
+            <a href="index.html"><button id="reset-button" onclick="
+                score.wins = 0;
+                score.losses = 0;
+                score.ties = 0;
+                score.totalGame = 0;
+                localStorage.removeItem('score')
+            ">Reset</button></a>
+
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+
 </body>
 </html>
